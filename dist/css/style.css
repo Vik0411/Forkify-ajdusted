@@ -157,7 +157,8 @@ body {
 
 .header {
   grid-area: head;
-  background-color: #8b4420;
+  background-image: url("../img/woodone.jpg");
+  background-size: cover;
   display: flex;
   align-items: center;
   justify-content: space-between; }
