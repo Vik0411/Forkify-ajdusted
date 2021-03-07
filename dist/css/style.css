@@ -42,7 +42,7 @@ body {
       border-radius: 0; } }
 
 .btn, .btn-small, .btn-small:link, .btn-small:visited {
-  background-image: url("../img/woodone.jpg");
+  background-image: url("../img/woodtwo.jpg");
   background-size: cover;
   border-radius: 10rem;
   border: none;
@@ -159,7 +159,7 @@ body {
 
 .header {
   grid-area: head;
-  background-image: url("../img/woodone.jpg");
+  background-image: url("../img/woodtwo.jpg");
   background-size: cover;
   display: flex;
   align-items: center;
@@ -343,7 +343,7 @@ body {
       -webkit-box-decoration-break: clone;
       box-decoration-break: clone;
       padding: 1.3rem 2rem;
-      background-image: url("../img/woodone.jpg");
+      background-image: url("../img/woodtwo.jpg");
       background-size: cover; }
   .recipe__details {
     display: flex;
