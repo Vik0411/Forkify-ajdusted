@@ -219,11 +219,50 @@ body {
     z-index: 10;
     padding: 2rem 0;
     width: 34rem;
-    background-color: #fff;
+    background-color: rgb(255, 255, 255);
     box-shadow: 0 0.8rem 5rem 2rem rgba(101, 90, 86, 0.1);
     visibility: hidden;
     opacity: 0;
     transition: all .5s .2s; }
+
+
+
+    .likescz {
+      position: relative;
+      align-self: stretch;
+      padding: 0 !important;
+      width: 70px ; }
+      .likes__fieldcz {
+        cursor: pointer;
+        padding: 15 4rem;
+        display: inline-flex;
+        align-items: center;
+        height: 100%;
+        transition: all .3s; }
+        .likes__fieldcz:hover {
+          background-color: #F2EFEE; }
+      .likes__panelcz:hover,
+      .likes__fieldcz:hover + .likes__panelcz {
+        visibility: visible;
+        opacity: 1; }
+      .likes__iconcz {
+        fill: #e7ad1a;
+        height: 3.75rem;
+        width: 3.75rem; }
+      .likes__panelcz {
+        position: absolute;
+        right: 0;
+        top: 10rem;
+        z-index: 10;
+        padding: 2rem 0;
+        width: 34rem;
+        background-color: rgb(255, 255, 255);
+        box-shadow: 0 0.8rem 5rem 2rem rgba(101, 90, 86, 0.1);
+        visibility: hidden;
+        opacity: 0;
+        transition: all .5s .2s; }
+    
+
 
 .results,
 .likes {
@@ -403,6 +442,34 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center; }
+    .recipe__love-my-special {
+      background-image: linear-gradient(to right bottom, #FBDB89,  #e7ad1a);
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      height: 4.5rem;
+      width: 4.5rem;
+      margin-left: auto;
+      transition: all .2s;
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+      .recipe__love-my-special:hover {
+        transform: scale(1.07); }
+      .recipe__love-my-special:focus {
+        outline: none; }
+      .recipe__love-my-special svg {
+        height: 2.75rem;
+        width: 2.75rem;
+        fill: #fff; }
+    .recipe__ingredients {
+      padding: 4rem 5rem;
+      font-size: 1.5rem;
+      line-height: 1.4;
+      background-color: #F2EFEE;
+      display: flex;
+      flex-direction: column;
+      align-items: center; }
   .recipe__ingredient-list {
     display: grid;
     grid-template-columns: 1fr 1fr;
