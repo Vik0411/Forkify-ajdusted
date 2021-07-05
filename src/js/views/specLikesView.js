@@ -29,6 +29,6 @@ export const renderSpecLike = specLike => {
 };
 
 export const deleteSpecLike = id => {
-    const el = document.querySelector(`.likes__linkcz[href*="${id}"]`).parentElement;
+    const el = document.querySelector(`.likes__link[href*="${id}"]`).parentElement;
     if (el) el.parentElement.removeChild(el);
 }
