@@ -2,10 +2,12 @@ import Search from './models/Search';
 import Recipe from './models/Recipe';
 import List from './models/List';
 import Likes from './models/Likes';
+import SpecLikes from './models/SpecLikes';
 import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
 import * as listView from './views/listView';
 import * as likesView from './views/likesView';
+import * as specLikesView from './views/specLikesView';
 import { elements, renderLoader, clearLoader } from './views/base';
 
 /** Global state of the app
@@ -94,7 +96,8 @@ const controlRecipe = async () => {
             clearLoader();
             recipeView.renderRecipe(
                 state.recipe,
-                state.likes.isLiked(id)
+                state.likes.isLiked(id),
+                state.speclikes.isSpecLiked(id)
             );
 
         } catch (err) {
@@ -192,6 +195,58 @@ window.addEventListener('load', () => {
 });
 
 
+/** 
+ * SPECLIKE CONTROLLER
+ */
+const controlSpecLike = () => {
+    if (!state.speclikes) state.speclikes = new SpecLikes();
+    const currentID = state.recipe.id;
+
+    // User has NOT yet liked current recipe
+    if (!state.speclikes.isSpecLiked(currentID)) {
+        // Add like to the state
+        const newSpecLike = state.speclikes.addSpecLike(
+            currentID,
+            state.recipe.title,
+            state.recipe.author,
+            state.recipe.img
+        );
+        // Toggle the like button
+        specLikesView.toggleSpecLikeBtn(true);
+
+        // Add like to UI list
+        specLikesView.renderSpecLike(newSpecLike);
+
+    // User HAS liked current recipe
+    } else {
+        // Remove like from the state
+        state.speclikes.deleteSpecLike(currentID);
+
+        // Toggle the like button
+        specLikesView.toggleSpecLikeBtn(false);
+
+        // Remove like from UI list
+        specLikesView.deleteSpecLike(currentID);
+    }
+    specLikesView.toggleSpecLikeMenu(state.speclikes.getNumSpecLikes());
+};
+
+// Restore liked recipes on page load
+window.addEventListener('load', () => {
+    state.speclikes = new SpecLikes();
+    
+    // Restore likes
+    state.speclikes.readStorage();
+
+    // Toggle like menu button
+    specLikesView.toggleSpecLikeMenu(state.speclikes.getNumSpecLikes());
+
+    // Render the existing likes
+    state.speclikes.speclikes.forEach(speclike => specLikesView.renderSpecLike(speclike));
+});
+
+
+
 // Handling recipe button clicks
 elements.recipe.addEventListener('click', e => {
     if (e.target.matches('.btn-decrease, .btn-decrease *')) {
@@ -210,5 +265,8 @@ elements.recipe.addEventListener('click', e => {
     } else if (e.target.matches('.recipe__love, .recipe__love *')) {
         // Like controller
         controlLike();
+    } else if (e.target.matches('.recipe__love-my-special, .recipe__love-my-special *')) {
+        // Like controller
+        controlSpecLike();
     }
 });
