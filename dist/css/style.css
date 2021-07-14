@@ -240,13 +240,13 @@ body {
         height: 100%;
         transition: all .3s; }
         .likes__fieldcz:hover {
-          background-color: #F2EFEE; }
+          background-color: #812b0e; }
       .likes__panelcz:hover,
       .likes__fieldcz:hover + .likes__panelcz {
         visibility: visible;
         opacity: 1; }
       .likes__iconcz {
-        fill: #e7ad1a;
+        fill: #d1290c;
         height: 3.75rem;
         width: 3.75rem; }
       .likes__panelcz {
@@ -256,7 +256,7 @@ body {
         z-index: 10;
         padding: 2rem 0;
         width: 34rem;
-        background-color: rgb(255, 255, 255);
+        background-color: rgba(211, 21, 21, 0.377);
         box-shadow: 0 0.8rem 5rem 2rem rgba(101, 90, 86, 0.1);
         visibility: hidden;
         opacity: 0;
@@ -443,7 +443,7 @@ body {
     flex-direction: column;
     align-items: center; }
     .recipe__love-my-special {
-      background-image: linear-gradient(to right bottom, #FBDB89,  #e7ad1a);
+      background-image: linear-gradient(to right bottom, #FBDB89,  #e7321a);
       border-radius: 50%;
       border: none;
       cursor: pointer;
@@ -461,7 +461,7 @@ body {
       .recipe__love-my-special svg {
         height: 2.75rem;
         width: 2.75rem;
-        fill: #fff; }
+        fill: rgb(199, 14, 14); }
     .recipe__ingredients {
       padding: 4rem 5rem;
       font-size: 1.5rem;
