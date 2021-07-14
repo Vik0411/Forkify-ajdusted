@@ -462,6 +462,27 @@ body {
         height: 2.75rem;
         width: 2.75rem;
         fill: rgb(199, 14, 14); }
+
+    .recipe__love-my-special .tooltiptext {
+      /* Tooltip text */
+  visibility: hidden;
+  width: 120px;
+  background-color: rgb(231, 13, 13);
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+ 
+  /* Position the tooltip text - see examples below! */
+  position: absolute;
+  z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.recipe__love-my-special:hover .tooltiptext {
+  visibility: visible;
+}
+    }
     .recipe__ingredients {
       padding: 4rem 5rem;
       font-size: 1.5rem;

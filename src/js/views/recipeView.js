@@ -86,6 +86,7 @@ export const renderRecipe = (recipe, isLiked, isSpecLiked) => {
                     <use href="img/icons.svg#icon-heart${isSpecLiked ? '' : '-outlined'}"></use>
                     
                 </svg>
+                <span class="tooltiptext">My special likes</span>
             </button>
         </div>
 
