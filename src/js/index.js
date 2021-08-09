@@ -156,28 +156,31 @@ const controlLike = () => {
         // Add like to the state
         const newLike = state.likes.addLike(
             currentID,
+            state.recipe.img,
             state.recipe.title,
             state.recipe.author,
-            state.recipe.img
         );
         // Toggle the like button
         likesView.toggleLikeBtn(true);
 
         // Add like to UI list
         likesView.renderLike(newLike);
-
     // User HAS liked current recipe
     } else {
         // Remove like from the state
         state.likes.deleteLike(currentID);
+        likesView.clearResults();
 
         // Toggle the like button
         likesView.toggleLikeBtn(false);
 
         // Remove like from UI list
-        likesView.deleteLike(currentID);
+        likesView.deleteLike(currentID)
     }
     likesView.toggleLikeMenu(state.likes.getNumLikes());
+    likesView.clearResults()
+    likesView.renderLikeResults(state.likes.likes)
+   
 };
 
 // Restore liked recipes on page load
@@ -191,8 +194,22 @@ window.addEventListener('load', () => {
     likesView.toggleLikeMenu(state.likes.getNumLikes());
 
     // Render the existing likes
-    state.likes.likes.forEach(like => likesView.renderLike(like));
+    likesView.renderLikeResults(state.likes.likes);
+    
 });
+
+elements.likesList.addEventListener('click', e => {
+    const btn = e.target.closest('.btn-inline');
+    if (btn) {
+        const goToPage = parseInt(btn.dataset.goto, 10);
+        likesView.clearResults();
+        likesView.renderLikeResults(state.likes.likes, goToPage);
+    }
+});
+
+
+
+
 
 
 /** 
