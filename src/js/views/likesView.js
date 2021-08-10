@@ -25,7 +25,7 @@ export const renderLike = like => {
                     <img src="${like.img}" alt="${like.title}">
                 </figure>
                 <div class="likes__data">
-                    <h4 class="likes__name">${like.title}</h4>
+                    <h4 class="likes__name">${limitRecipeTitle(like.title)}</h4>
                     <p class="likes__author">${like.author}</p>
                 </div>
             </a>
@@ -76,8 +76,6 @@ export const renderLikeResults = (likedLikes, page = 1, resPerPage = 5) => {
     // render results of currente page
     const start = (page - 1) * resPerPage;
     const end = page * resPerPage;
-    console.log(likedLikes)
-    console.log(likedLikes.length)
 
     likedLikes.slice(start, end).forEach(renderLike);
     // render pagination buttons    
