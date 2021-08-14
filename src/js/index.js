@@ -203,13 +203,57 @@ elements.likesList.addEventListener('click', e => {
         const goToPage = parseInt(btn.dataset.goto, 10);
         likesView.clearResults();
         likesView.renderLikeResults(state.likes.likes, goToPage);
+    //    $('.likes__panel', '.likes__field').css({'visibility': 'visible', 'opacity': '1'})
     }
 });
 
+const openOrCloseTheLikes = () => {
+    elements.likesListing.style.visibility = "visible";
+    elements.likesListing.style.opacity = "1";
+  };
 
+// implement the correct panel behavior
+// 1. when I click likes, it opens and stays open
+//elements.likesTop.addEventListener("click", openOrCloseTheLikes);
 
+// 2. when I click button next or prev page, it stays opened
+// 3. when I click away anytime, the panel closes
+const closeDaLikes = () => {
+   const visible = elements.likesListing.style.visibility = "visible";  
+    if(true){
+        elements.likesListing.style.visibility = "hidden";    
+        elements.likesListing.style.opacity = "0";
+    } 
+};
 
+elements.likesTop.addEventListener("click", closeDaLikes);
 
+const openDaLikes = () => {
+     if( elements.likesListing.style.visibility === "hidden"){
+         elements.likesListing.style.visibility = "visible";    
+         elements.likesListing.style.opacity = "1";
+     } 
+ };
+ 
+ elements.specLikesMenu.addEventListener("click", openDaLikes);
+
+/*
+// when I click on add or add like or remove like, panel is closed and like correctly added
+/*
+const btn = document.getElementsByClassName('likes__fieldcz');
+let btn2 = document.getElementsByClassName('.btn-inline')
+console.log(btn)
+elements.likesMenu.addEventListener('click', e => {
+    const btn = e.target.closest('likes__fieldcz');
+    if (btn) {
+        console.log(btn)
+        let bttt = document.getElementsByClassName('.likes__panel');
+   bttt.style.visibility = 'hidden';
+      
+    }
+});
+
+*/
 
 /** 
  * SPECLIKE CONTROLLER

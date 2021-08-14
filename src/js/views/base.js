@@ -8,8 +8,15 @@ export const elements = {
     shopping: document.querySelector('.shopping__list'),
     likesMenu: document.querySelector('.likes__field'),
     likesList: document.querySelector('.likes__list'),
+    likesListing: document.querySelector('.likes__panel'),
+    likesTop: document.querySelector('.likes'),
+    likesItem: document.querySelector('.likes__link:link'),
+    likesVisited: document.querySelector('.likes__link:visited'),
+    likesActive: document.querySelector('.results__link--active'),
+    likesData: document.querySelector('.likes__data'),
     specLikesMenu: document.querySelector('.likes__fieldcz'),
-    specLikesList: document.querySelector('.likes__listcz')
+    specLikesList: document.querySelector('.likes__listcz'),
+
 };
 
 export const elementStrings = {

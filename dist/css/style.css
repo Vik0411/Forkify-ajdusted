@@ -204,15 +204,12 @@ body {
     transition: all .3s; }
     .likes__field:hover {
       background-color: #F2EFEE; }
-  .likes__panel:hover,
-  .likes__field:hover + .likes__panel {
-    visibility: visible;
-    opacity: 1; }
   .likes__icon {
     fill: #e7ad1a;
     height: 3.75rem;
     width: 3.75rem; }
   .likes__panel {
+    display: flex;
     position: absolute;
     right: 0;
     top: 10rem;
@@ -221,10 +218,9 @@ body {
     width: 34rem;
     background-color: rgb(255, 255, 255);
     box-shadow: 0 0.8rem 5rem 2rem rgba(101, 90, 86, 0.1);
-    visibility: hidden;
-    opacity: 0;
+    visibility: visible;
+    opacity: 1;
     transition: all .5s .2s; }
-
 
 
     .likescz {
