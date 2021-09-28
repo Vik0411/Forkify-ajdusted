@@ -53,20 +53,24 @@ body {
   display: flex;
   align-items: center;
   transition: all .2s; }
-  .btn:hover, .btn-small:hover {
+  .btn:hover, .btn-small:hover, .close_button:hover {
     transform: scale(1.05); }
-  .btn:focus, .btn-small:focus {
+  .btn:focus, .btn-small:focus, .close_button:focus {
     outline: none; }
   .btn > *:first-child, .btn-small > *:first-child {
     margin-right: 1rem; }
 
-.btn {
+.btn, .close_button {
   padding: 1.3rem 3rem;
   font-size: 1.4rem; }
-  .btn svg {
+  .btn svg, .img-close {
     height: 2.25rem;
     width: 2.25rem;
     fill: currentColor; }
+
+    .img-close{
+    background-color: red;
+    }
 
 .btn-small, .btn-small:link, .btn-small:visited {
   font-size: 1.3rem;
@@ -101,11 +105,9 @@ body {
   .btn-inline:focus {
     outline: none; }
 
-    .img-close{
-    height: 3.75rem;
-    width: 3.75rem;
-    }
+    .close_button
 
+  
 .btn-tiny {
   height: 1.75rem;
   width: 1.75rem;
