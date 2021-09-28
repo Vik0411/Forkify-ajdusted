@@ -17,6 +17,7 @@ export const elements = {
     specLikesMenu: document.querySelector('.likes__fieldcz'),
     specLikesList: document.querySelector('.likes__listcz'),
     closeButton: document.querySelector('.close_button'),
+    header: document.querySelector('.header'),
 };
 
 export const elementStrings = {

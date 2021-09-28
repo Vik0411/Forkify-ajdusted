@@ -52,11 +52,10 @@ const createButton = (page, type) => `
 `;
 
 const createClose = () => `
-<button class = "close_button">
+<div class = "close_button">
 <img class = "img-close" src= "img/close.png">
 </img>
-</button>
-    `;
+</div>`;
 
 const renderButtons = (page, numResults, resPerPage) => {
     const pages = Math.ceil(numResults / resPerPage);
@@ -80,7 +79,7 @@ const renderButtons = (page, numResults, resPerPage) => {
 };
 
    export const renderClose = () => {
-    elements.likesList.insertAdjacentHTML('beforebegin', createClose);  
+    elements.header.insertAdjacentHTML('beforeend', createClose);  
 };
 
 export const renderLikeResults = (likedLikes, page = 1, resPerPage = 5) => {

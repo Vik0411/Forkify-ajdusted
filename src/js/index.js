@@ -207,13 +207,6 @@ elements.likesList.addEventListener('click', e => {
     }
 });
 
-const createClose = () => `
-<button class = "close_button" >
-<img class = "img-close" src= "img/close.png">
-</img>
-</button>
-    `;
-
 // implement the correct panel behavior
 // 1. when I click likes, it opens and stays open
 
@@ -233,15 +226,17 @@ elements.likesTop.addEventListener("click", openDaLikes);
 
 const closeDaLikes = () => {  
     elements.likesListing.style.visibility = "hidden";    
-        elements.likesListing.style.visibility = "hidden";    
-    elements.likesListing.style.visibility = "hidden";    
-    elements.likesListing.style.opacity = "0";
+        
+ 
+    elements.likesListing.style.opacity = "none";
+
 };
 
-elements.closeButton.addEventListener("click",  e => {
-    const btn = e.target.closest('.close_button');
+elements.header.addEventListener("click",  e => {
+    const btn = e.target.matches('.close_button');
     if (btn) {
-        closeDaLikes
+        closeDaLikes();
+        showClick()
     }
     });
 
