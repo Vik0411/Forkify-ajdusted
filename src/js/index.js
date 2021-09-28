@@ -207,39 +207,64 @@ elements.likesList.addEventListener('click', e => {
     }
 });
 
-const openOrCloseTheLikes = () => {
-    elements.likesListing.style.visibility = "visible";
-    elements.likesListing.style.opacity = "1";
-  };
+const createClose = () => `
+<button class = "close_button" >
+<img class = "img-close" src= "img/close.png">
+</img>
+</button>
+    `;
 
 // implement the correct panel behavior
 // 1. when I click likes, it opens and stays open
-//elements.likesTop.addEventListener("click", openOrCloseTheLikes);
+
+const showClick = () => {
+    console.log("clicked");
+}
+
+const openDaLikes = () => {
+    elements.likesListing.style.visibility = "visible";    
+    elements.likesListing.style.opacity = "1";
+};
+
+elements.likesTop.addEventListener("click", openDaLikes);
 
 // 2. when I click button next or prev page, it stays opened
 // 3. when I click away anytime, the panel closes
-const closeDaLikes = () => {
-   const visible = elements.likesListing.style.visibility = "visible";  
-    if(true){
+
+const closeDaLikes = () => {  
+    elements.likesListing.style.visibility = "hidden";    
         elements.likesListing.style.visibility = "hidden";    
-        elements.likesListing.style.opacity = "0";
-    } 
+    elements.likesListing.style.visibility = "hidden";    
+    elements.likesListing.style.opacity = "0";
 };
 
-elements.likesTop.addEventListener("click", closeDaLikes);
-
-const openDaLikes = () => {
-     if( elements.likesListing.style.visibility === "hidden"){
-         elements.likesListing.style.visibility = "visible";    
-         elements.likesListing.style.opacity = "1";
-     } 
- };
- 
- elements.specLikesMenu.addEventListener("click", openDaLikes);
+elements.closeButton.addEventListener("click",  e => {
+    const btn = e.target.closest('.close_button');
+    if (btn) {
+        closeDaLikes
+    }
+    });
 
 /*
 // when I click on add or add like or remove like, panel is closed and like correctly added
 /*
+
+const closeOrOpenDaLikes = () => {  
+    if(elements.likesListing.style.visibility = "hidden"){
+    elements.likesListing.style.visibility = "visibity";    
+    elements.likesListing.style.opacity = "1";
+    } else {
+    elements.likesListing.style.visibility = "hidden";    
+    elements.likesListing.style.opacity = "0";
+    }
+     } 
+    }
+};
+
+elements.specLikesMenu.addEventListener("click", closeOrOpenDaLikes);
+
+
+
 const btn = document.getElementsByClassName('likes__fieldcz');
 let btn2 = document.getElementsByClassName('.btn-inline')
 console.log(btn)
@@ -258,6 +283,7 @@ elements.likesMenu.addEventListener('click', e => {
 /** 
  * SPECLIKE CONTROLLER
  */
+
 const controlSpecLike = () => {
     if (!state.speclikes) state.speclikes = new SpecLikes();
     const currentID = state.recipe.id;
@@ -302,7 +328,7 @@ window.addEventListener('load', () => {
     specLikesView.toggleSpecLikeMenu(state.speclikes.getNumSpecLikes());
 
     // Render the existing likes
-    state.speclikes.speclikes.forEach(speclike => specLikesView.renderSpecLike(speclike));
+    state.speclikes.speclikes.forEach(speclike => specLikesView.renderSpecLike(speclike));    
 });
 
 

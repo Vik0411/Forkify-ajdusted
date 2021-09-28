@@ -101,6 +101,11 @@ body {
   .btn-inline:focus {
     outline: none; }
 
+    .img-close{
+    height: 3.75rem;
+    width: 3.75rem;
+    }
+
 .btn-tiny {
   height: 1.75rem;
   width: 1.75rem;
@@ -209,7 +214,6 @@ body {
     height: 3.75rem;
     width: 3.75rem; }
   .likes__panel {
-    display: flex;
     position: absolute;
     right: 0;
     top: 10rem;
@@ -218,8 +222,8 @@ body {
     width: 34rem;
     background-color: rgb(255, 255, 255);
     box-shadow: 0 0.8rem 5rem 2rem rgba(101, 90, 86, 0.1);
-    visibility: visible;
-    opacity: 1;
+    visibility: hidden;
+    opacity: 0;
     transition: all .5s .2s; }
 
 

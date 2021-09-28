@@ -51,6 +51,13 @@ const createButton = (page, type) => `
     </button>
 `;
 
+const createClose = () => `
+<button class = "close_button">
+<img class = "img-close" src= "img/close.png">
+</img>
+</button>
+    `;
+
 const renderButtons = (page, numResults, resPerPage) => {
     const pages = Math.ceil(numResults / resPerPage);
 
@@ -72,12 +79,19 @@ const renderButtons = (page, numResults, resPerPage) => {
     elements.likesList.insertAdjacentHTML('beforeend', button);
 };
 
+   export const renderClose = () => {
+    elements.likesList.insertAdjacentHTML('beforebegin', createClose);  
+};
+
 export const renderLikeResults = (likedLikes, page = 1, resPerPage = 5) => {
     // render results of currente page
     const start = (page - 1) * resPerPage;
     const end = page * resPerPage;
-
+    renderClose()
     likedLikes.slice(start, end).forEach(renderLike);
-    // render pagination buttons    
-    renderButtons(page, likedLikes.length, resPerPage);
+
+    // render pagination buttons  
+    renderButtons(page, likedLikes.length, resPerPage)
+  
 };
+ 
