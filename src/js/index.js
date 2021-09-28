@@ -288,26 +288,36 @@ elements.likesMenu.addEventListener('click', e => {
 //toggle like menu
 
 const openDaLikesB = () => {
+    stateOfLikeTop;
     if(stateOfLikeTop){
-    elements.likesListing.style.visibility = "visible";    
-    elements.likesListing.style.opacity = "1";
-console.log("clickopen")
-stateOfLikeTop = !stateOfLikeTop
-console.log(stateOfLikeTop)
-return
+        setTimeout(function(){ elements.likesListing.style.visibility = "visible";    
+        elements.likesListing.style.opacity = "1";
+    console.log("clickopen")
+    stateOfLikeTop = !stateOfLikeTop
+    console.log(stateOfLikeTop)}, 30);
+    
+} else if(stateOfLikeTop == false){
+    elements.header.addEventListener("click",  e => {
+    const btn = e.target.matches('.likes__field');
+    elements.likesListing.style.visibility = "hidden";        
+    elements.likesListing.style.opacity = "none";
+    stateOfLikeTop = true;
+    console.log(stateOfLikeTop)
+    showClick()
+});
 }
-stateOfLikeTop = !stateOfLikeTop
 }
 
 elements.likesTop.addEventListener("click", openDaLikesB);
 
+/*
 elements.header.addEventListener("click",  e => {
     const btn = e.target.matches('.likes__field');
     if (btn) {
         closeDaLikes();
     }
     });
-
+*/
 
     // open or close
 
