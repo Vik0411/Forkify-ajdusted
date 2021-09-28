@@ -211,9 +211,10 @@ elements.likesList.addEventListener('click', e => {
 // 1. when I click likes, it opens and stays open
 
 const showClick = () => {
-    console.log("clicked");
+    console.log("clickedclose");
 }
 
+/*
 const openDaLikes = () => {
     elements.likesListing.style.visibility = "visible";    
     elements.likesListing.style.opacity = "1";
@@ -221,22 +222,31 @@ const openDaLikes = () => {
 
 elements.likesTop.addEventListener("click", openDaLikes);
 
+*/
+
 // 2. when I click button next or prev page, it stays opened
 // 3. when I click away anytime, the panel closes
 
-const closeDaLikes = () => {  
-    elements.likesListing.style.visibility = "hidden";    
-        
- 
-    elements.likesListing.style.opacity = "none";
+let stateOfLikeTop = true;
 
+const closeDaLikes = () => {  
+    if(!stateOfLikeTop){
+    elements.likesListing.style.visibility = "hidden";        
+    elements.likesListing.style.opacity = "none";
+    stateOfLikeTop = true;
+    console.log(stateOfLikeTop)
+    showClick()
+    return
+    } else {
+return
+    }
+    
 };
 
 elements.header.addEventListener("click",  e => {
     const btn = e.target.matches('.close_button');
     if (btn) {
-        closeDaLikes();
-        showClick()
+     closeDaLikes();
     }
     });
 
@@ -274,6 +284,37 @@ elements.likesMenu.addEventListener('click', e => {
 });
 
 */
+
+//toggle like menu
+
+const openDaLikesB = () => {
+    if(stateOfLikeTop){
+    elements.likesListing.style.visibility = "visible";    
+    elements.likesListing.style.opacity = "1";
+console.log("clickopen")
+stateOfLikeTop = !stateOfLikeTop
+console.log(stateOfLikeTop)
+return
+}
+stateOfLikeTop = !stateOfLikeTop
+}
+
+elements.likesTop.addEventListener("click", openDaLikesB);
+
+elements.header.addEventListener("click",  e => {
+    const btn = e.target.matches('.likes__field');
+    if (btn) {
+        closeDaLikes();
+    }
+    });
+
+
+    // open or close
+
+
+    const OpenOrClose = () =>{
+
+    }
 
 /** 
  * SPECLIKE CONTROLLER
