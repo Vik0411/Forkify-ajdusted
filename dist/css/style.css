@@ -179,9 +179,9 @@ body {
   align-items: center;
   justify-content: space-between; }
   .header__logo {
-    margin-left: 4rem;
+    margin-left: 14rem;
     height: 4.5rem;
-    display: block; }
+    display: inline-block; }
 
 .search {
   background-color: #fff;
@@ -237,13 +237,13 @@ body {
 
 
     .likescz {
-      position: relative;
+      position: absolute;
       align-self: stretch;
       padding: 0 !important;
       width: 70px ; }
       .likes__fieldcz {
         cursor: pointer;
-        padding: 15 4rem;
+        padding: 0 4rem;
         display: inline-flex;
         align-items: center;
         height: 100%;
@@ -255,12 +255,14 @@ body {
         visibility: visible;
         opacity: 1; }
       .likes__iconcz {
+        margin-top: 28px;
+        margin-bottom: 35px;
         fill: #d1290c;
         height: 3.75rem;
         width: 3.75rem; }
       .likes__panelcz {
         position: absolute;
-        right: 0;
+        right: 10;
         top: 10rem;
         z-index: 10;
         padding: 2rem 0;
