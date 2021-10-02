@@ -227,28 +227,7 @@ elements.likesTop.addEventListener("click", openDaLikes);
 // 2. when I click button next or prev page, it stays opened
 // 3. when I click away anytime, the panel closes
 
-let stateOfLikeTop = true;
 
-const closeDaLikes = () => {  
-    if(!stateOfLikeTop){
-    elements.likesListing.style.visibility = "hidden";        
-    elements.likesListing.style.opacity = "none";
-    stateOfLikeTop = true;
-    console.log(stateOfLikeTop)
-    showClick()
-    return
-    } else {
-return
-    }
-    
-};
-
-elements.header.addEventListener("click",  e => {
-    const btn = e.target.matches('.close_button');
-    if (btn) {
-     closeDaLikes();
-    }
-    });
 
 /*
 // when I click on add or add like or remove like, panel is closed and like correctly added
@@ -285,7 +264,47 @@ elements.likesMenu.addEventListener('click', e => {
 
 */
 
+//fade out likes menu
+
+function lessTheOppacity()
+{
+    var box = document.getElementById("box");
+    var oppArray = ["0.9", "0.8", "0.7", "0.6", "0.5", "0.4", "0.3", "0.2", "0.1", "0"];
+    var x = 0;
+    (function next() {
+        elements.likesListing.style.opacity = oppArray[x];
+        if(++x < oppArray.length) {
+            setTimeout(next, 6); //depending on how fast you want to fade
+        }
+    })();
+}
+
 //toggle like menu
+
+let stateOfLikeTop = true;
+
+const closeDaLikes = () => {  
+    if(stateOfLikeTop == false){
+    elements.likesListing.style.visibility = "hidden";        
+    elements.likesListing.style.opacity = "none";
+    stateOfLikeTop = true;
+    console.log(stateOfLikeTop)
+    showClick()
+    lessTheOppacity();
+    return
+    } else {
+return
+    }
+
+};
+
+elements.header.addEventListener("click",  e => {
+    const btn = e.target.matches('.likes__field');
+    if (btn) {
+     closeDaLikes();
+    }
+    });
+
 
 const openDaLikesB = () => {
     if(stateOfLikeTop){
@@ -296,25 +315,9 @@ stateOfLikeTop = !stateOfLikeTop
 console.log(stateOfLikeTop)
 return
 }
-stateOfLikeTop = !stateOfLikeTop
 }
 
-elements.likesTop.addEventListener("click", openDaLikesB);
-
-elements.header.addEventListener("click",  e => {
-    const btn = e.target.matches('.likes__field');
-    if (btn) {
-        closeDaLikes();
-    }
-    });
-
-
-    // open or close
-
-
-    const OpenOrClose = () =>{
-
-    }
+elements.likesMenu.addEventListener("click", openDaLikesB);
 
 /** 
  * SPECLIKE CONTROLLER
