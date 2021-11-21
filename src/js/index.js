@@ -214,78 +214,47 @@ const showClick = () => {
     console.log("clickedclose");
 }
 
-/*
-const openDaLikes = () => {
-    elements.likesListing.style.visibility = "visible";    
-    elements.likesListing.style.opacity = "1";
-};
+//fade out likes menu function
 
-elements.likesTop.addEventListener("click", openDaLikes);
+function lessTheOppacity()
+{
+    var box = document.getElementById("box");
+    var oppArray = ["0.9", "0.8", "0.7", "0.6", "0.5", "0.4", "0.3", "0.2", "0.1", "0"];
+    var x = 0;
+    (function next() {
+        elements.likesListing.style.opacity = oppArray[x];
+        if(++x < oppArray.length) {
+            setTimeout(next, 6); //depending on how fast you want to fade
+        }
+    })();
+}
 
-*/
-
-// 2. when I click button next or prev page, it stays opened
-// 3. when I click away anytime, the panel closes
+//toggle open close like menu
 
 let stateOfLikeTop = true;
 
 const closeDaLikes = () => {  
-    if(!stateOfLikeTop){
+    if(stateOfLikeTop == false){
     elements.likesListing.style.visibility = "hidden";        
     elements.likesListing.style.opacity = "none";
     stateOfLikeTop = true;
     console.log(stateOfLikeTop)
     showClick()
+    lessTheOppacity();
     return
     } else {
 return
     }
-    
+
 };
 
 elements.header.addEventListener("click",  e => {
-    const btn = e.target.matches('.close_button');
+    const btn = e.target.matches('.likes__field');
     if (btn) {
      closeDaLikes();
     }
     });
 
-/*
-// when I click on add or add like or remove like, panel is closed and like correctly added
-/*
-
-const closeOrOpenDaLikes = () => {  
-    if(elements.likesListing.style.visibility = "hidden"){
-    elements.likesListing.style.visibility = "visibity";    
-    elements.likesListing.style.opacity = "1";
-    } else {
-    elements.likesListing.style.visibility = "hidden";    
-    elements.likesListing.style.opacity = "0";
-    }
-     } 
-    }
-};
-
-elements.specLikesMenu.addEventListener("click", closeOrOpenDaLikes);
-
-
-
-const btn = document.getElementsByClassName('likes__fieldcz');
-let btn2 = document.getElementsByClassName('.btn-inline')
-console.log(btn)
-elements.likesMenu.addEventListener('click', e => {
-    const btn = e.target.closest('likes__fieldcz');
-    if (btn) {
-        console.log(btn)
-        let bttt = document.getElementsByClassName('.likes__panel');
-   bttt.style.visibility = 'hidden';
-      
-    }
-});
-
-*/
-
-//toggle like menu
 
 const openDaLikesB = () => {
     stateOfLikeTop;
@@ -308,23 +277,8 @@ const openDaLikesB = () => {
 }
 }
 
-elements.likesTop.addEventListener("click", openDaLikesB);
+elements.likesMenu.addEventListener("click", openDaLikesB);
 
-/*
-elements.header.addEventListener("click",  e => {
-    const btn = e.target.matches('.likes__field');
-    if (btn) {
-        closeDaLikes();
-    }
-    });
-*/
-
-    // open or close
-
-
-    const OpenOrClose = () =>{
-
-    }
 
 /** 
  * SPECLIKE CONTROLLER

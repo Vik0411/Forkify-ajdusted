@@ -86,7 +86,6 @@ export const renderLikeResults = (likedLikes, page = 1, resPerPage = 5) => {
     // render results of currente page
     const start = (page - 1) * resPerPage;
     const end = page * resPerPage;
-    renderClose()
     likedLikes.slice(start, end).forEach(renderLike);
 
     // render pagination buttons  
