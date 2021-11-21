@@ -1,5 +1,4 @@
 import { elements } from './base';
-import { renderRecipe } from './recipeView';
 import { limitRecipeTitle } from './searchView';
 
 export const toggleLikeBtn = isLiked => {
@@ -51,12 +50,6 @@ const createButton = (page, type) => `
     </button>
 `;
 
-const createClose = () => `
-<div class = "close_button">
-<img class = "img-close" src= "img/close.png">
-</img>
-</div>`;
-
 const renderButtons = (page, numResults, resPerPage) => {
     const pages = Math.ceil(numResults / resPerPage);
 
@@ -78,10 +71,6 @@ const renderButtons = (page, numResults, resPerPage) => {
     elements.likesList.insertAdjacentHTML('beforeend', button);
 };
 
-   export const renderClose = () => {
-    elements.header.insertAdjacentHTML('beforeend', createClose);  
-};
-
 export const renderLikeResults = (likedLikes, page = 1, resPerPage = 5) => {
     // render results of currente page
     const start = (page - 1) * resPerPage;
@@ -95,16 +84,12 @@ export const renderLikeResults = (likedLikes, page = 1, resPerPage = 5) => {
 
 
 // implement the correct panel behavior
-// 1. when I click likes, it opens and stays open
-
-const showClick = () => {
-    console.log("clickedclose");
-}
+// when I click likes, it opens and stays open
+//toggle open close like menu
+export const openAndCLose = {
 
 //fade out likes menu function
-
-function lessTheOppacity()
-{
+fade: function(){
     var box = document.getElementById("box");
     var oppArray = ["0.9", "0.8", "0.7", "0.6", "0.5", "0.4", "0.3", "0.2", "0.1", "0"];
     var x = 0;
@@ -114,34 +99,45 @@ function lessTheOppacity()
             setTimeout(next, 6); //depending on how fast you want to fade
         }
     })();
-}
+},
 
-//toggle open close like menu
+state: true,
 
-let stateOfLikeTop = true;
-
-export const closeDaLikes = () => {  
-    if(stateOfLikeTop == false){
+close:function(){
+    if(openAndCLose.state == false){
     elements.likesListing.style.visibility = "hidden";        
     elements.likesListing.style.opacity = "none";
-    stateOfLikeTop = true;
-    console.log(stateOfLikeTop)
-    showClick()
-    lessTheOppacity();
+    console.log("clickclose")
+    openAndCLose.state = true;
+    openAndCLose.fade();
     return
     } else {
 return
     }
 
-};
+},
 
-export const openDaLikesB = () => {
-    if(stateOfLikeTop){
+open: () => {
+    if(openAndCLose.state){
     elements.likesListing.style.visibility = "visible";    
     elements.likesListing.style.opacity = "1";
 console.log("clickopen")
-stateOfLikeTop = !stateOfLikeTop
-console.log(stateOfLikeTop)
+openAndCLose.state = !openAndCLose.state
 return
 }
 }
+};
+
+/* different way of implementing and close functionality via close element
+
+   export const renderClose = () => {
+    elements.header.insertAdjacentHTML('beforeend', createClose);  
+};
+
+const createClose = () => `
+<div class = "close_button">
+<img class = "img-close" src= "img/close.png">
+</img>
+</div>`;
+
+*/

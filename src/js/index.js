@@ -9,6 +9,7 @@ import * as listView from './views/listView';
 import * as likesView from './views/likesView';
 import * as specLikesView from './views/specLikesView';
 import { elements, renderLoader, clearLoader } from './views/base';
+import { openAndCLose } from './views/likesView';
 
 /** Global state of the app
  * - Search object
@@ -212,11 +213,11 @@ elements.likesList.addEventListener('click', e => {
 elements.header.addEventListener("click",  e => {
     const btn = e.target.matches('.likes__field');
     if (btn) {
-     closeDaLikes();
+     openAndCLose.close();
     }
     });
 
-elements.likesMenu.addEventListener("click", openDaLikesB);
+elements.likesMenu.addEventListener("click", openAndCLose.open);
 
 /** 
  * SPECLIKE CONTROLLER
