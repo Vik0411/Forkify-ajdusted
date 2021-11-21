@@ -14,7 +14,7 @@ import { elements, renderLoader, clearLoader } from './views/base';
  * - Search object
  * - Current recipe object
  * - Shopping list object
- * - Liked recipes
+ * - Liked and Specially liked recipes
  */
 const state = {};
 
@@ -169,7 +169,7 @@ const controlLike = () => {
     } else {
         // Remove like from the state
         state.likes.deleteLike(currentID);
-        likesView.clearResults();
+        likesView.clearResults(); 
 
         // Toggle the like button
         likesView.toggleLikeBtn(false);
@@ -207,46 +207,7 @@ elements.likesList.addEventListener('click', e => {
     }
 });
 
-// implement the correct panel behavior
-// 1. when I click likes, it opens and stays open
-
-const showClick = () => {
-    console.log("clickedclose");
-}
-
-//fade out likes menu function
-
-function lessTheOppacity()
-{
-    var box = document.getElementById("box");
-    var oppArray = ["0.9", "0.8", "0.7", "0.6", "0.5", "0.4", "0.3", "0.2", "0.1", "0"];
-    var x = 0;
-    (function next() {
-        elements.likesListing.style.opacity = oppArray[x];
-        if(++x < oppArray.length) {
-            setTimeout(next, 6); //depending on how fast you want to fade
-        }
-    })();
-}
-
-//toggle open close like menu
-
-let stateOfLikeTop = true;
-
-const closeDaLikes = () => {  
-    if(stateOfLikeTop == false){
-    elements.likesListing.style.visibility = "hidden";        
-    elements.likesListing.style.opacity = "none";
-    stateOfLikeTop = true;
-    console.log(stateOfLikeTop)
-    showClick()
-    lessTheOppacity();
-    return
-    } else {
-return
-    }
-
-};
+//open and close likes menu
 
 elements.header.addEventListener("click",  e => {
     const btn = e.target.matches('.likes__field');
@@ -254,18 +215,6 @@ elements.header.addEventListener("click",  e => {
      closeDaLikes();
     }
     });
-
-
-const openDaLikesB = () => {
-    if(stateOfLikeTop){
-    elements.likesListing.style.visibility = "visible";    
-    elements.likesListing.style.opacity = "1";
-console.log("clickopen")
-stateOfLikeTop = !stateOfLikeTop
-console.log(stateOfLikeTop)
-return
-}
-}
 
 elements.likesMenu.addEventListener("click", openDaLikesB);
 

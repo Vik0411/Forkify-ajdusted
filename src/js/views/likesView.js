@@ -92,4 +92,56 @@ export const renderLikeResults = (likedLikes, page = 1, resPerPage = 5) => {
     renderButtons(page, likedLikes.length, resPerPage)
   
 };
- 
+
+
+// implement the correct panel behavior
+// 1. when I click likes, it opens and stays open
+
+const showClick = () => {
+    console.log("clickedclose");
+}
+
+//fade out likes menu function
+
+function lessTheOppacity()
+{
+    var box = document.getElementById("box");
+    var oppArray = ["0.9", "0.8", "0.7", "0.6", "0.5", "0.4", "0.3", "0.2", "0.1", "0"];
+    var x = 0;
+    (function next() {
+        elements.likesListing.style.opacity = oppArray[x];
+        if(++x < oppArray.length) {
+            setTimeout(next, 6); //depending on how fast you want to fade
+        }
+    })();
+}
+
+//toggle open close like menu
+
+let stateOfLikeTop = true;
+
+export const closeDaLikes = () => {  
+    if(stateOfLikeTop == false){
+    elements.likesListing.style.visibility = "hidden";        
+    elements.likesListing.style.opacity = "none";
+    stateOfLikeTop = true;
+    console.log(stateOfLikeTop)
+    showClick()
+    lessTheOppacity();
+    return
+    } else {
+return
+    }
+
+};
+
+export const openDaLikesB = () => {
+    if(stateOfLikeTop){
+    elements.likesListing.style.visibility = "visible";    
+    elements.likesListing.style.opacity = "1";
+console.log("clickopen")
+stateOfLikeTop = !stateOfLikeTop
+console.log(stateOfLikeTop)
+return
+}
+}
