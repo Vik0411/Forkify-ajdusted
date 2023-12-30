@@ -18,16 +18,20 @@ class AsyncParallelHookCodeFactory extends HookCodeFactory {
 
 const factory = new AsyncParallelHookCodeFactory();
 
-class AsyncParallelHook extends Hook {
-	constructor(args) {
-		super(args);
-		this.call = this._call = undefined;
-	}
+const COMPILE = function(options) {
+	factory.setup(this, options);
+	return factory.create(options);
+};
 
-	compile(options) {
-		factory.setup(this, options);
-		return factory.create(options);
-	}
+function AsyncParallelHook(args = [], name = undefined) {
+	const hook = new Hook(args, name);
+	hook.constructor = AsyncParallelHook;
+	hook.compile = COMPILE;
+	hook._call = undefined;
+	hook.call = undefined;
+	return hook;
 }
+
+AsyncParallelHook.prototype = null;
 
 module.exports = AsyncParallelHook;

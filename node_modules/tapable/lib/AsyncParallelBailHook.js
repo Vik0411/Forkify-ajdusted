@@ -11,7 +11,7 @@ class AsyncParallelBailHookCodeFactory extends HookCodeFactory {
 	content({ onError, onResult, onDone }) {
 		let code = "";
 		code += `var _results = new Array(${this.options.taps.length});\n`;
-		code += "var _checkDone = () => {\n";
+		code += "var _checkDone = function() {\n";
 		code += "for(var i = 0; i < _results.length; i++) {\n";
 		code += "var item = _results[i];\n";
 		code += "if(item === undefined) return false;\n";
@@ -29,7 +29,8 @@ class AsyncParallelBailHookCodeFactory extends HookCodeFactory {
 		code += this.callTapsParallel({
 			onError: (i, err, done, doneBreak) => {
 				let code = "";
-				code += `if(${i} < _results.length && ((_results.length = ${i + 1}), (_results[${i}] = { error: ${err} }), _checkDone())) {\n`;
+				code += `if(${i} < _results.length && ((_results.length = ${i +
+					1}), (_results[${i}] = { error: ${err} }), _checkDone())) {\n`;
 				code += doneBreak(true);
 				code += "} else {\n";
 				code += done();
@@ -38,7 +39,8 @@ class AsyncParallelBailHookCodeFactory extends HookCodeFactory {
 			},
 			onResult: (i, result, done, doneBreak) => {
 				let code = "";
-				code += `if(${i} < _results.length && (${result} !== undefined && (_results.length = ${i + 1}), (_results[${i}] = { result: ${result} }), _checkDone())) {\n`;
+				code += `if(${i} < _results.length && (${result} !== undefined && (_results.length = ${i +
+					1}), (_results[${i}] = { result: ${result} }), _checkDone())) {\n`;
 				code += doneBreak(true);
 				code += "} else {\n";
 				code += done();
@@ -47,13 +49,13 @@ class AsyncParallelBailHookCodeFactory extends HookCodeFactory {
 			},
 			onTap: (i, run, done, doneBreak) => {
 				let code = "";
-				if(i > 0) {
+				if (i > 0) {
 					code += `if(${i} >= _results.length) {\n`;
 					code += done();
 					code += "} else {\n";
 				}
 				code += run();
-				if(i > 0) code += "}\n";
+				if (i > 0) code += "}\n";
 				return code;
 			},
 			onDone
@@ -64,16 +66,20 @@ class AsyncParallelBailHookCodeFactory extends HookCodeFactory {
 
 const factory = new AsyncParallelBailHookCodeFactory();
 
-class AsyncParallelBailHook extends Hook {
-	constructor(args) {
-		super(args);
-		this.call = this._call = undefined;
-	}
+const COMPILE = function(options) {
+	factory.setup(this, options);
+	return factory.create(options);
+};
 
-	compile(options) {
-		factory.setup(this, options);
-		return factory.create(options);
-	}
+function AsyncParallelBailHook(args = [], name = undefined) {
+	const hook = new Hook(args, name);
+	hook.constructor = AsyncParallelBailHook;
+	hook.compile = COMPILE;
+	hook._call = undefined;
+	hook.call = undefined;
+	return hook;
 }
+
+AsyncParallelBailHook.prototype = null;
 
 module.exports = AsyncParallelBailHook;

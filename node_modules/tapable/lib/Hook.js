@@ -4,20 +4,46 @@
 */
 "use strict";
 
+const util = require("util");
+
+const deprecateContext = util.deprecate(() => {},
+"Hook.context is deprecated and will be removed");
+
+const CALL_DELEGATE = function(...args) {
+	this.call = this._createCall("sync");
+	return this.call(...args);
+};
+const CALL_ASYNC_DELEGATE = function(...args) {
+	this.callAsync = this._createCall("async");
+	return this.callAsync(...args);
+};
+const PROMISE_DELEGATE = function(...args) {
+	this.promise = this._createCall("promise");
+	return this.promise(...args);
+};
+
 class Hook {
-	constructor(args) {
-		if(!Array.isArray(args)) args = [];
+	constructor(args = [], name = undefined) {
 		this._args = args;
+		this.name = name;
 		this.taps = [];
 		this.interceptors = [];
-		this.call = this._call = this._createCompileDelegate("call", "sync");
-		this.promise = this._promise = this._createCompileDelegate("promise", "promise");
-		this.callAsync = this._callAsync = this._createCompileDelegate("callAsync", "async");
+		this._call = CALL_DELEGATE;
+		this.call = CALL_DELEGATE;
+		this._callAsync = CALL_ASYNC_DELEGATE;
+		this.callAsync = CALL_ASYNC_DELEGATE;
+		this._promise = PROMISE_DELEGATE;
+		this.promise = PROMISE_DELEGATE;
 		this._x = undefined;
+
+		this.compile = this.compile;
+		this.tap = this.tap;
+		this.tapAsync = this.tapAsync;
+		this.tapPromise = this.tapPromise;
 	}
 
 	compile(options) {
-		throw new Error("Abstract: should be overriden");
+		throw new Error("Abstract: should be overridden");
 	}
 
 	_createCall(type) {
@@ -29,75 +55,62 @@ class Hook {
 		});
 	}
 
-	_createCompileDelegate(name, type) {
-		const lazyCompileHook = (...args) => {
-			this[name] = this._createCall(type);
-			return this[name](...args);
-		};
-		return lazyCompileHook;
+	_tap(type, options, fn) {
+		if (typeof options === "string") {
+			options = {
+				name: options.trim()
+			};
+		} else if (typeof options !== "object" || options === null) {
+			throw new Error("Invalid tap options");
+		}
+		if (typeof options.name !== "string" || options.name === "") {
+			throw new Error("Missing name for tap");
+		}
+		if (typeof options.context !== "undefined") {
+			deprecateContext();
+		}
+		options = Object.assign({ type, fn }, options);
+		options = this._runRegisterInterceptors(options);
+		this._insert(options);
 	}
 
 	tap(options, fn) {
-		if(typeof options === "string")
-			options = { name: options };
-		if(typeof options !== "object" || options === null)
-			throw new Error("Invalid arguments to tap(options: Object, fn: function)");
-		options = Object.assign({ type: "sync", fn: fn }, options);
-		if(typeof options.name !== "string" || options.name === "")
-			throw new Error("Missing name for tap");
-		options = this._runRegisterInterceptors(options);
-		this._insert(options);
+		this._tap("sync", options, fn);
 	}
 
 	tapAsync(options, fn) {
-		if(typeof options === "string")
-			options = { name: options };
-		if(typeof options !== "object" || options === null)
-			throw new Error("Invalid arguments to tapAsync(options: Object, fn: function)");
-		options = Object.assign({ type: "async", fn: fn }, options);
-		if(typeof options.name !== "string" || options.name === "")
-			throw new Error("Missing name for tapAsync");
-		options = this._runRegisterInterceptors(options);
-		this._insert(options);
+		this._tap("async", options, fn);
 	}
 
 	tapPromise(options, fn) {
-		if(typeof options === "string")
-			options = { name: options };
-		if(typeof options !== "object" || options === null)
-			throw new Error("Invalid arguments to tapPromise(options: Object, fn: function)");
-		options = Object.assign({ type: "promise", fn: fn }, options);
-		if(typeof options.name !== "string" || options.name === "")
-			throw new Error("Missing name for tapPromise");
-		options = this._runRegisterInterceptors(options);
-		this._insert(options);
+		this._tap("promise", options, fn);
 	}
 
 	_runRegisterInterceptors(options) {
-		for(const interceptor of this.interceptors) {
-			if(interceptor.register) {
+		for (const interceptor of this.interceptors) {
+			if (interceptor.register) {
 				const newOptions = interceptor.register(options);
-				if(newOptions !== undefined)
+				if (newOptions !== undefined) {
 					options = newOptions;
+				}
 			}
 		}
 		return options;
 	}
 
 	withOptions(options) {
-		const mergeOptions = opt => Object.assign({}, options, typeof opt === "string" ? { name: opt } : opt);
+		const mergeOptions = opt =>
+			Object.assign({}, options, typeof opt === "string" ? { name: opt } : opt);
 
-		// Prevent creating endless prototype chains
-		options = Object.assign({}, options, this._withOptions);
-		const base = this._withOptionsBase || this;
-		const newHook = Object.create(base);
-
-		newHook.tapAsync = (opt, fn) => base.tapAsync(mergeOptions(opt), fn),
-		newHook.tap = (opt, fn) => base.tap(mergeOptions(opt), fn);
-		newHook.tapPromise = (opt, fn) => base.tapPromise(mergeOptions(opt), fn);
-		newHook._withOptions = options;
-		newHook._withOptionsBase = base;
-		return newHook;
+		return {
+			name: this.name,
+			tap: (opt, fn) => this.tap(mergeOptions(opt), fn),
+			tapAsync: (opt, fn) => this.tapAsync(mergeOptions(opt), fn),
+			tapPromise: (opt, fn) => this.tapPromise(mergeOptions(opt), fn),
+			intercept: interceptor => this.intercept(interceptor),
+			isUsed: () => this.isUsed(),
+			withOptions: opt => this.withOptions(mergeOptions(opt))
+		};
 	}
 
 	isUsed() {
@@ -107,9 +120,10 @@ class Hook {
 	intercept(interceptor) {
 		this._resetCompilation();
 		this.interceptors.push(Object.assign({}, interceptor));
-		if(interceptor.register) {
-			for(let i = 0; i < this.taps.length; i++)
+		if (interceptor.register) {
+			for (let i = 0; i < this.taps.length; i++) {
 				this.taps[i] = interceptor.register(this.taps[i]);
+			}
 		}
 	}
 
@@ -122,30 +136,31 @@ class Hook {
 	_insert(item) {
 		this._resetCompilation();
 		let before;
-		if(typeof item.before === "string")
+		if (typeof item.before === "string") {
 			before = new Set([item.before]);
-		else if(Array.isArray(item.before)) {
+		} else if (Array.isArray(item.before)) {
 			before = new Set(item.before);
 		}
 		let stage = 0;
-		if(typeof item.stage === "number")
+		if (typeof item.stage === "number") {
 			stage = item.stage;
+		}
 		let i = this.taps.length;
-		while(i > 0) {
+		while (i > 0) {
 			i--;
 			const x = this.taps[i];
-			this.taps[i+1] = x;
+			this.taps[i + 1] = x;
 			const xStage = x.stage || 0;
-			if(before) {
-				if(before.has(x.name)) {
+			if (before) {
+				if (before.has(x.name)) {
 					before.delete(x.name);
 					continue;
 				}
-				if(before.size > 0) {
+				if (before.size > 0) {
 					continue;
 				}
 			}
-			if(xStage > stage) {
+			if (xStage > stage) {
 				continue;
 			}
 			i++;
@@ -154,5 +169,7 @@ class Hook {
 		this.taps[i] = item;
 	}
 }
+
+Object.setPrototypeOf(Hook.prototype, null);
 
 module.exports = Hook;

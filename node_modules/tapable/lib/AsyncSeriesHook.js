@@ -18,16 +18,20 @@ class AsyncSeriesHookCodeFactory extends HookCodeFactory {
 
 const factory = new AsyncSeriesHookCodeFactory();
 
-class AsyncSeriesHook extends Hook {
-	constructor(args) {
-		super(args);
-		this.call = this._call = undefined;
-	}
+const COMPILE = function(options) {
+	factory.setup(this, options);
+	return factory.create(options);
+};
 
-	compile(options) {
-		factory.setup(this, options);
-		return factory.create(options);
-	}
+function AsyncSeriesHook(args = [], name = undefined) {
+	const hook = new Hook(args, name);
+	hook.constructor = AsyncSeriesHook;
+	hook.compile = COMPILE;
+	hook._call = undefined;
+	hook.call = undefined;
+	return hook;
 }
+
+AsyncSeriesHook.prototype = null;
 
 module.exports = AsyncSeriesHook;

@@ -26,17 +26,22 @@ class AsyncSeriesWaterfallHookCodeFactory extends HookCodeFactory {
 
 const factory = new AsyncSeriesWaterfallHookCodeFactory();
 
-class AsyncSeriesWaterfallHook extends Hook {
-	constructor(args) {
-		super(args);
-		if(args.length < 1) throw new Error("Waterfall hooks must have at least one argument");
-		this.call = this._call = undefined;
-	}
+const COMPILE = function(options) {
+	factory.setup(this, options);
+	return factory.create(options);
+};
 
-	compile(options) {
-		factory.setup(this, options);
-		return factory.create(options);
-	}
+function AsyncSeriesWaterfallHook(args = [], name = undefined) {
+	if (args.length < 1)
+		throw new Error("Waterfall hooks must have at least one argument");
+	const hook = new Hook(args, name);
+	hook.constructor = AsyncSeriesWaterfallHook;
+	hook.compile = COMPILE;
+	hook._call = undefined;
+	hook.call = undefined;
+	return hook;
 }
+
+AsyncSeriesWaterfallHook.prototype = null;
 
 module.exports = AsyncSeriesWaterfallHook;
