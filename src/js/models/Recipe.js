@@ -8,10 +8,22 @@ export default class Recipe {
 
   async getRecipe() {
     try {
+      //for api v2
+      // const res = await axios(
+      //   `https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bcf01?key=${key}`
+      // );
+      // console.log(res);
+
+      // this.result = res.data.data.recipe;
+      // this.title = res.data.data.recipe.title;
+      // this.author = res.data.data.recipe.publisher;
+      // this.img = res.data.data.recipe.image_url;
+      // this.url = res.data.data.recipe.source_url;
+      // this.ingredients = res.data.data.recipe.ingredients;
+
       const res = await axios(
-        `https://forkify-api.herokuapp.com/api/v2/recipes/${id}?key=${KEY}`
-      ).then((response) => response.data);
-      console.log(res.recipes, "dd");
+        `https://forkify-api.herokuapp.com/api/get?rId=${this.id}`
+      );
       this.title = res.data.recipe.title;
       this.author = res.data.recipe.publisher;
       this.img = res.data.recipe.image_url;
@@ -59,7 +71,10 @@ export default class Recipe {
 
     const newIngredients = this.ingredients.map((el) => {
       // 1) Uniform units
+      console.log(el);
+      // let ingredient = el.description.toLowerCase();
       let ingredient = el.toLowerCase();
+
       unitsLong.forEach((unit, i) => {
         ingredient = ingredient.replace(unit, unitsShort[i]);
       });
