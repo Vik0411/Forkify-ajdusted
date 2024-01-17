@@ -10,7 +10,7 @@ export const renderItem = (item) => {
             <p class="shopping__description">${item.ingredient}</p>
             <button class="shopping__delete btn-tiny">
                 <svg>
-                    <use href="/dist/img/icons.svg#icon-circle-with-cross"></use>
+                    <use href="img/icons.svg#icon-circle-with-cross"></use>
                 </svg>
             </button>
         </li>

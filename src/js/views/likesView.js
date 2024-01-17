@@ -5,7 +5,7 @@ export const toggleLikeBtn = (isLiked) => {
   const iconString = isLiked ? "icon-heart" : "icon-heart-outlined";
   document
     .querySelector(".recipe__love use")
-    .setAttribute("href", `/dist/img/icons.svg#${iconString}`);
+    .setAttribute("href", `img/icons.svg#${iconString}`);
   // icons.svg#icon-heart-outlined
 };
 
@@ -50,7 +50,7 @@ const createButton = (page, type) => `
 }>
         <span>Page ${type === "prev" ? page - 1 : page + 1}</span>
         <svg class="search__icon">
-            <use href="/dist/img/icons.svg#icon-triangle-${
+            <use href="img/icons.svg#icon-triangle-${
               type === "prev" ? "left" : "right"
             }"></use>
         </svg>
@@ -150,7 +150,7 @@ export const openAndCLose = {
 
 const createClose = () => `
 <div class = "close_button">
-<img class = "img-close" src= "/dist/img/close.png">
+<img class = "img-close" src= "img/close.png">
 </img>
 </div>`;
 
