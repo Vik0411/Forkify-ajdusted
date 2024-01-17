@@ -50,24 +50,28 @@ export default class Recipe {
     const unitsLong = [
       "tablespoons",
       "tablespoon",
+      "ounces,",
       "ounces",
       "ounce",
       "teaspoons",
       "teaspoon",
       "cups",
+      "pound",
       "pounds",
     ];
     const unitsShort = [
       "tbsp",
       "tbsp",
-      "oz",
-      "oz",
+      "gr,",
+      "gr",
+      "gr",
       "tsp",
       "tsp",
       "cup",
-      "pound",
+      "kg",
+      "kg",
     ];
-    const units = [...unitsShort, "kg", "g"];
+    const units = [...unitsShort];
 
     const newIngredients = this.ingredients.map((el) => {
       // 1) Uniform units
@@ -105,6 +109,16 @@ export default class Recipe {
           unit: arrIng[unitIndex],
           ingredient: arrIng.slice(unitIndex + 1).join(" "),
         };
+
+        if (objIng.unit.includes("gr")) {
+          console.log(objIng.count, "grams");
+          objIng.count = objIng.count * 28.35;
+        }
+
+        if (objIng.unit.includes("kg")) {
+          console.log(objIng.count, "kgs");
+          objIng.count = objIng.count * 0.454;
+        }
       } else if (parseInt(arrIng[0], 10)) {
         // There is NO unit, but 1st element is number
         objIng = {
