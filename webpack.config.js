@@ -12,7 +12,7 @@ module.exports = {
     filename: "js/bundle.js",
   },
   devServer: {
-    static: "./dist",
+    static: "./",
   },
   plugins: [
     new webpack.ProvidePlugin({
