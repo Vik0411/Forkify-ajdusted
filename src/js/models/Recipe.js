@@ -29,6 +29,7 @@ export default class Recipe {
       this.img = res.data.recipe.image_url;
       this.url = res.data.recipe.source_url;
       this.ingredients = res.data.recipe.ingredients;
+      console.log(this.ingredients);
     } catch (error) {
       console.log(error);
       alert("Something went wrong :(");
@@ -59,6 +60,8 @@ export default class Recipe {
       "pound",
       "pounds",
     ];
+    // add also handelling for lbs
+
     const unitsShort = [
       "tbsp",
       "tbsp",
@@ -69,7 +72,7 @@ export default class Recipe {
       "tsp",
       "cup",
       "kg",
-      "kg",
+      "kgs",
     ];
     const units = [...unitsShort];
 
@@ -110,6 +113,7 @@ export default class Recipe {
           ingredient: arrIng.slice(unitIndex + 1).join(" "),
         };
 
+        console.log(objIng.unit);
         if (objIng.unit.includes("gr")) {
           console.log(objIng.count, "grams");
           objIng.count = objIng.count * 28.35;
