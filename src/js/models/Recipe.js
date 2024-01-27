@@ -59,6 +59,7 @@ export default class Recipe {
       "cups",
       "pound",
       "pounds",
+      "lbs",
     ];
     // add also handelling for lbs
 
@@ -72,6 +73,7 @@ export default class Recipe {
       "tsp",
       "cup",
       "kg",
+      "kgs",
       "kgs",
     ];
     const units = [...unitsShort];
@@ -113,14 +115,15 @@ export default class Recipe {
           ingredient: arrIng.slice(unitIndex + 1).join(" "),
         };
 
-        console.log(objIng.unit);
+        // console.log(objIng.unit);
+        //convert to gram
         if (objIng.unit.includes("gr")) {
-          console.log(objIng.count, "grams");
+          // console.log(objIng.count, "grams");
           objIng.count = objIng.count * 28.35;
         }
-
+        //convert to kg
         if (objIng.unit.includes("kg")) {
-          console.log(objIng.count, "kgs");
+          // console.log(objIng.count, "kgs");
           objIng.count = objIng.count * 0.454;
         }
       } else if (parseInt(arrIng[0], 10)) {

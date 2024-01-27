@@ -114,12 +114,13 @@ body {
 }
 
 .btn-inline {
-  color: #e9e5b4;
+  color: #ddce24;
   font-size: 1.2rem;
   border: none;
   background-color: #f9f5f3;
   padding: 0.8rem 1.2rem;
   border-radius: 10rem;
+  margin-right: 7px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -135,7 +136,7 @@ body {
   margin: 0 0.4rem;
 }
 .btn-inline:hover {
-  color: #e9e5b4;
+  color: #ecdc2d;
   background-color: #f2efee;
 }
 .btn-inline:focus {
@@ -149,6 +150,7 @@ body {
   background: none;
   cursor: pointer;
 }
+
 .btn-tiny svg {
   height: 100%;
   width: 100%;
@@ -159,7 +161,7 @@ body {
   outline: none;
 }
 .btn-tiny:hover svg {
-  fill: #e9e5b4;
+  fill: #e7d723;
   transform: translateY(-1px);
 }
 .btn-tiny:active svg {
@@ -432,8 +434,6 @@ body {
 .recipe__fig {
   height: 30rem;
   position: relative;
-  transform: scale(1.04) translateY(-1px);
-  transform-origin: top;
 }
 .recipe__fig::before {
   content: "";
@@ -488,9 +488,8 @@ body {
 }
 .recipe__info-icon {
   height: 2rem;
-  width: 2rem;
+  width: 1.7rem;
   fill: #e7ad1a;
-  margin-right: 1rem;
 }
 .recipe__info-data {
   margin-right: 0.4rem;
@@ -501,6 +500,7 @@ body {
   margin-left: 1.5rem;
   visibility: hidden;
   opacity: 0;
+  height: 40px;
   transform: translateY(5px);
   transition: all 0.4s;
 }
@@ -514,23 +514,21 @@ body {
   border-radius: 50%;
   border: none;
   cursor: pointer;
-  height: 4.5rem;
-  width: 4.5rem;
-  margin-left: auto;
+  margin-right: 10px;
   transition: all 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .recipe__love:hover {
-  transform: scale(1.07);
+  transform: scale(1.2);
 }
 .recipe__love:focus {
   outline: none;
 }
 .recipe__love svg {
-  height: 2.75rem;
-  width: 2.75rem;
+  height: 3.75rem;
+  width: 3.75rem;
   fill: #fff;
 }
 .recipe__ingredients {
@@ -547,9 +545,7 @@ body {
   border-radius: 50%;
   border: none;
   cursor: pointer;
-  height: 4.5rem;
-  width: 4.5rem;
-  margin-left: auto;
+  margin-right: 8px;
   transition: all 0.2s;
   display: flex;
   align-items: center;
@@ -562,8 +558,8 @@ body {
   outline: none;
 }
 .recipe__love-my-special svg {
-  height: 2.75rem;
-  width: 2.75rem;
+  height: 3.75rem;
+  width: 3.75rem;
   fill: rgb(199, 14, 14);
 }
 
@@ -692,17 +688,18 @@ body {
   margin-right: 1.5rem;
 }
 .shopping__delete {
-  margin-top: 0.5rem;
+  height: 100%;
   position: absolute;
+  border: 0px;
   right: 0;
+  top: 0;
   background-image: linear-gradient(
     to right,
     transparent 0%,
     #fff 40%,
     #fff 100%
   );
-  width: 3.75rem;
-  padding-left: 2rem;
+  width: 2.75rem;
   visibility: hidden;
   opacity: 0;
   transition: all 0.5s;

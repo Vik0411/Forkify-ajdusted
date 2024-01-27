@@ -73,6 +73,8 @@ const renderButtons = (page, numResults, resPerPage) => {
   } else if (page === pages && pages > 1) {
     // Only button to go to prev page
     button = createButton(page, "prev");
+  } else {
+    button = ``;
   }
 
   elements.likesList.insertAdjacentHTML("beforeend", button);
@@ -90,7 +92,7 @@ export const renderLikeResults = (likedLikes, page = 1, resPerPage = 5) => {
 
 // implement the correct panel behavior
 // when I click likes, it opens and stays open
-//toggle open close like menu
+// toggle open close like menu
 export const openAndCLose = {
   //fade out likes menu function
   fade: function () {

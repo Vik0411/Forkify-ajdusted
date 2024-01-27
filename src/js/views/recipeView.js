@@ -4,11 +4,16 @@ import { Fraction } from "fractional";
 export const clearRecipe = () => {
   elements.recipe.innerHTML = "";
 };
-const formatCount = (count) => {
+const formatCount = (unit, count) => {
   if (count) {
     // count = 2.5 --> 5/2 --> 2 1/2
     // count = 0.5 --> 1/2
     const newCount = Math.round(count * 10000) / 10000;
+
+    //do not convert for kg and g units
+    if (unit === "gr" || unit === "kg" || unit === "kgs" || unit === "gr,") {
+      return newCount;
+    }
     const [int, dec] = newCount
       .toString()
       .split(".")
@@ -27,12 +32,21 @@ const formatCount = (count) => {
   return "?";
 };
 
+// const doNotFormatKg(ingr){
+//   if(ingr.unit === "gr" || "kg"){
+
+//   }
+// }
+
 const createIngredient = (ingredient) => `
     <li class="recipe__item">
         <svg class="recipe__icon">
             <use href="img/icons.svg#icon-check"></use>
         </svg>
-        <div class="recipe__count">${formatCount(ingredient.count)}</div>
+        <div class="recipe__count">${formatCount(
+          ingredient.unit,
+          ingredient.count
+        )}</div>
         <div class="recipe__ingredient">
             <span class="recipe__unit">${ingredient.unit}</span>
             ${ingredient.ingredient}
@@ -144,6 +158,9 @@ export const updateServingsIngredients = (recipe) => {
   // Update ingredeints
   const countElements = Array.from(document.querySelectorAll(".recipe__count"));
   countElements.forEach((el, i) => {
-    el.textContent = formatCount(recipe.ingredients[i].count);
+    el.textContent = formatCount(
+      recipe.ingredients[i].unit,
+      recipe.ingredients[i].count
+    );
   });
 };
