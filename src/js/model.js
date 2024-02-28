@@ -1,8 +1,7 @@
-import { async } from 'regenerator-runtime';
 import { API_URL, RES_PER_PAGE, KEY } from './config.js';
 // import { getJSON, sendJSON } from './helpers.js';
 import { AJAX } from './helpers.js';
-import { elements } from './views/likesView.js';
+import { elements } from './helpers.js';
 
 export const state = {
   recipe: {},
@@ -127,12 +126,17 @@ const clearBookmarks = function () {
 // clearBookmarks();
 
 ///////////////////////////////////////////
+
+export const persistData = function () {
+  localStorage.setItem('likes', JSON.stringify(state.likes));
+};
+
 export const addLike = function (publisher, id, image, title) {
   const like = { publisher, id, image, title };
   state.likes.push(like);
 
   // Persist data in localStorage
-  // this.persistData();
+  persistData();
 
   return like;
 };
@@ -142,7 +146,7 @@ export const deleteLike = function (id) {
   state.likes.splice(index, 1);
 
   // Persist data in localStorage
-  // this.persistData();
+  persistData();
 };
 
 export const isLiked = function (id) {
@@ -151,10 +155,6 @@ export const isLiked = function (id) {
 
 export const getNumLikes = function () {
   return state.likes.length;
-};
-
-export const persistData = function () {
-  localStorage.setItem('likes', JSON.stringify(state.likes));
 };
 
 export const readStorage = function () {

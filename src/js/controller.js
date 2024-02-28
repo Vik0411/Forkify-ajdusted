@@ -10,13 +10,12 @@ import likesView from './views/likesView.js';
 import { isLiked } from './model.js';
 import { addLike } from './model.js';
 import { getNumLikes } from './model.js';
-import { elements } from './views/likesView.js';
+import { elements } from './helpers.js';
 import { close } from './model.js';
 import { open } from './model.js';
 
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
-import { async } from 'regenerator-runtime';
 
 const controlRecipes = async function () {
   try {
@@ -112,16 +111,14 @@ const controlLike = () => {
       model.state.recipe.title
     );
     // Toggle the like button
-    // likesView.toggleLikeBtn(true);
+    likesView.toggleLikeBtn(true);
 
     // Add like to UI list
     likesView.renderLike(newLike);
     // User HAS liked current recipe
-    model.persistData();
   } else {
     // Remove like from the state
     model.deleteLike(currentID);
-    model.persistData();
 
     likesView.clearResults();
 
@@ -137,7 +134,7 @@ const controlLike = () => {
 
 // // Restore liked recipes on page load
 window.addEventListener('load', () => {
-  model.addLike(model.state.likes);
+  // model.addLike(model.state.likes);
 
   // Restore likes
   model.readStorage();
@@ -154,7 +151,7 @@ elements.likesList.addEventListener('click', e => {
   if (btn) {
     const goToPage = parseInt(btn.dataset.goto, 10);
     likesView.clearResults();
-    likesView.renderLikeResults(state.likes.likes, goToPage);
+    likesView.renderLikeResults(model.state.likes, goToPage);
     //    $('.likes__panel', '.likes__field').css({'visibility': 'visible', 'opacity': '1'})
   }
 });

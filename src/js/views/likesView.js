@@ -1,33 +1,13 @@
 import View from './View.js';
-export const elements = {
-  searchForm: document.querySelector('.search'),
-  searchInput: document.querySelector('.search__field'),
-  searchRes: document.querySelector('.results'),
-  searchResList: document.querySelector('.results__list'),
-  searchResPages: document.querySelector('.results__pages'),
-  recipe: document.querySelector('.recipe'),
-  shopping: document.querySelector('.shopping__list'),
-  likesMenu: document.querySelector('.likes__field'),
-  likesList: document.querySelector('.likes__list'),
-  likesListing: document.querySelector('.likes__panel'),
-  likesTop: document.querySelector('.likes'),
-  likesItem: document.querySelector('.likes__link:link'),
-  likesVisited: document.querySelector('.likes__link:visited'),
-  likesActive: document.querySelector('.results__link--active'),
-  likesData: document.querySelector('.likes__data'),
-  specLikesMenu: document.querySelector('.likes__fieldcz'),
-  specLikesList: document.querySelector('.likes__listcz'),
-  closeButton: document.querySelector('.close_button'),
-  header: document.querySelector('.header'),
-};
 import { isLiked } from '../model.js';
+import { elements } from '../helpers.js';
 
 class likesView extends View {
   _parentElement = document.querySelector('.header');
 
   toggleLikeBtn() {
     const iconString = isLiked ? 'icon-heart' : 'icon-heart-outlined';
-    document.querySelector('.recipe__love use');
+    document.querySelector('.recipe__love > use');
     // .setAttribute('href', `src/img/icons.svg#${iconString}`);
     // icons.svg#icon-heart-outlined
   }
@@ -69,7 +49,6 @@ class likesView extends View {
   };
 
   //implement listing through pages
-
   // type: 'prev' or 'next'
   createButton = (page, type) => `
     <button class="btn-inline results__btn--${type}" data-goto=${
@@ -99,15 +78,15 @@ class likesView extends View {
         `;
     } else if (page === pages && pages > 1) {
       // Only button to go to prev page
-      button = createButton(page, 'prev');
+      button = this.createButton(page, 'prev');
     } else {
       button = ``;
     }
 
-    elements.likesList.insertAdjacentHTML('beforeend', button);
+    elements.likesList.insertAdjacentHTML('afterbegin', button);
   };
 
-  renderLikeResults = (likedLikes, page = 1, resPerPage = 5) => {
+  renderLikeResults = (likedLikes, page = 1, resPerPage = 3) => {
     // render results of currente page
     const start = (page - 1) * resPerPage;
     const end = page * resPerPage;
