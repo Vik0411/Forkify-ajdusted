@@ -1,0 +1,131 @@
+.likes {
+  position: relative;
+  align-self: stretch;
+  padding: 0 !important;
+}
+.likes__field {
+  cursor: pointer;
+  padding: 0 4rem;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  transition: all 0.3s;
+}
+.likes__field:hover {
+  background-color: #f2efee;
+}
+.likes__icon {
+  fill: #e7ad1a;
+  height: 3.75rem;
+  width: 3.75rem;
+}
+.likes__panel {
+  position: absolute;
+  right: 0;
+  top: 10rem;
+  z-index: 10;
+  padding: 2rem 0;
+  width: 34rem;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 0.8rem 5rem 2rem rgba(101, 90, 86, 0.1);
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.5s 0.2s;
+}
+
+.likes__fig {
+  flex: 0 0 5.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+  height: 5.5rem;
+  margin-right: 2rem;
+  position: relative;
+  backface-visibility: hidden;
+}
+.results__fig::before,
+.likes__fig::before {
+  content: '';
+  display: block;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: linear-gradient(to right bottom, #fbdb89, #e7ad1a);
+  opacity: 0.4;
+}
+.results__fig img,
+.likes__fig img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.3s;
+}
+.results__name,
+.likes__name {
+  font-size: 1.3rem;
+  color: #e7ad1a;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+.results__author,
+.likes__author {
+  font-size: 1.1rem;
+  color: #968b87;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.results__pages,
+.likes__pages {
+  margin-top: 3rem;
+  padding: 0 3rem;
+}
+.results__pages::after,
+.likes__pages::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+.results__btn--prev,
+.likes__btn--prev {
+  float: left;
+  flex-direction: row-reverse;
+}
+.results__btn--next,
+.likes__btn--next {
+  float: right;
+}
+
+.recipe__love {
+  background-image: linear-gradient(to right bottom, #fbdb89, #e7ad1a);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.recipe__love:hover {
+  transform: scale(1.2);
+}
+.recipe__love:focus {
+  outline: none;
+}
+.recipe__love svg {
+  height: 3.75rem;
+  width: 3.75rem;
+  fill: #fff;
+}
+
+.header {
+  grid-area: head;
+  background-image: url('../img/woodtwo.jpg');
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
