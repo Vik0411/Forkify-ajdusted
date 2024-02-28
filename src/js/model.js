@@ -204,9 +204,9 @@ export const uploadRecipe = async function (newRecipe) {
 // implement the correct panel behavior
 // when I click likes, it opens and stays open
 // toggle open close like menu
-export const openAndCLose = () => {
+export const openAndCLose = {
   //fade out likes menu function
-  fade: () => {
+  fade: function () {
     var box = document.getElementById('box');
     var oppArray = [
       '0.9',
@@ -221,13 +221,14 @@ export const openAndCLose = () => {
       '0',
     ];
     var x = 0;
+
     (function next() {
       elements.likesListing.style.opacity = oppArray[x];
       if (++x < oppArray.length) {
         setTimeout(next, 6); //depending on how fast you want to fade
       }
     })();
-  };
+  },
 };
 
 export const close = () => {

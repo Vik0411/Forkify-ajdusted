@@ -117,9 +117,12 @@ const controlLike = () => {
     // Add like to UI list
     likesView.renderLike(newLike);
     // User HAS liked current recipe
+    model.persistData();
   } else {
     // Remove like from the state
-    model.state.likes.deleteLike(currentID);
+    model.deleteLike(currentID);
+    model.persistData();
+
     likesView.clearResults();
 
     // Toggle the like button
@@ -133,18 +136,18 @@ const controlLike = () => {
 };
 
 // // Restore liked recipes on page load
-// window.addEventListener('load', () => {
-//   model.state.likes = model.addLike();
+window.addEventListener('load', () => {
+  model.addLike(model.state.likes);
 
-//   // Restore likes
-//   model.state.likes.readStorage();
+  // Restore likes
+  model.readStorage();
 
-//   // Toggle like menu button
-//   likesView.toggleLikeMenu(model.state.likes.getNumLikes());
+  //   // Toggle like menu button
+  likesView.toggleLikeMenu(model.getNumLikes());
 
-//   // Render the existing likes
-//   likesView.renderLikeResults(model.state.likes.likes);
-// });
+  // Render the existing likes
+  likesView.renderLikeResults(model.state.likes);
+});
 
 elements.likesList.addEventListener('click', e => {
   const btn = e.target.closest('.btn-inline');

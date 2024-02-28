@@ -90,12 +90,12 @@ class likesView extends View {
     let button;
     if (page === 1 && pages > 1) {
       // Only button to go to next page
-      button = createButton(page, 'next');
+      button = this.createButton(page, 'next');
     } else if (page < pages) {
       // Both buttons
       button = `
-            ${createButton(page, 'prev')}
-            ${createButton(page, 'next')}
+            ${this.createButton(page, 'prev')}
+            ${this.createButton(page, 'next')}
         `;
     } else if (page === pages && pages > 1) {
       // Only button to go to prev page
@@ -104,7 +104,7 @@ class likesView extends View {
       button = ``;
     }
 
-    this._parentElement.insertAdjacentHTML('beforeend', button);
+    elements.likesList.insertAdjacentHTML('beforeend', button);
   };
 
   renderLikeResults = (likedLikes, page = 1, resPerPage = 5) => {
