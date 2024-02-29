@@ -1,7 +1,7 @@
 import { API_URL, RES_PER_PAGE, KEY } from './config.js';
 // import { getJSON, sendJSON } from './helpers.js';
 import { AJAX } from './helpers.js';
-import { elements } from './helpers.js';
+import { elements, oppArray } from './helpers.js';
 
 export const state = {
   recipe: {},
@@ -207,21 +207,7 @@ export const uploadRecipe = async function (newRecipe) {
 export const openAndCLose = {
   //fade out likes menu function
   fade: function () {
-    var box = document.getElementById('box');
-    var oppArray = [
-      '0.9',
-      '0.8',
-      '0.7',
-      '0.6',
-      '0.5',
-      '0.4',
-      '0.3',
-      '0.2',
-      '0.1',
-      '0',
-    ];
-    var x = 0;
-
+    let x = 0;
     (function next() {
       elements.likesListing.style.opacity = oppArray[x];
       if (++x < oppArray.length) {
@@ -231,25 +217,18 @@ export const openAndCLose = {
   },
 };
 
-export const close = () => {
-  if (state.likeState == false) {
-    elements.likesListing.style.visibility = 'hidden';
-    elements.likesListing.style.opacity = 'none';
-    console.log('clickclose');
-    state.likeState = true;
-    openAndCLose.fade();
-    return;
-  } else {
-    return;
-  }
-};
-
 export const open = () => {
-  if (state.likeState) {
+  if (!state.likeState) {
     elements.likesListing.style.visibility = 'visible';
     elements.likesListing.style.opacity = '1';
     console.log('clickopen');
     state.likeState = !state.likeState;
+    return;
+  } else {
+    elements.likesListing.style.visibility = 'hidden';
+    elements.likesListing.style.opacity = 'none';
+    state.likeState = false;
+    openAndCLose.fade();
     return;
   }
 };

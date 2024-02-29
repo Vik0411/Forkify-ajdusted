@@ -158,12 +158,7 @@ elements.likesList.addEventListener('click', e => {
 
 //open and close likes menu
 
-elements.header.addEventListener('click', e => {
-  const btn = e.target.matches('.likes__field');
-  if (btn) {
-    close();
-  }
-});
+// elements.likesMenu.addEventListener('click', close);
 
 elements.likesMenu.addEventListener('click', open);
 
