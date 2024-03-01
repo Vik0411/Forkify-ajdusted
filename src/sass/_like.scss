@@ -33,6 +33,78 @@
   transition: all 0.5s 0.2s;
 }
 
+.likescz {
+  position: absolute;
+  align-self: stretch;
+  padding: 0 !important;
+  width: 70px;
+}
+.likes__fieldcz {
+  cursor: pointer;
+  padding: 0 4rem;
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
+  transition: all 0.3s;
+}
+.likes__fieldcz:hover {
+  background-color: #812b0e;
+}
+.likes__panelcz:hover,
+.likes__fieldcz:hover + .likes__panelcz {
+  visibility: visible;
+  opacity: 1;
+}
+.likes__iconcz {
+  margin-top: 28px;
+  margin-bottom: 35px;
+  fill: #d1290c;
+  height: 3.75rem;
+  width: 3.75rem;
+}
+.likes__panelcz {
+  position: absolute;
+  right: 10;
+  top: 10rem;
+  z-index: 10;
+  padding: 2rem 0;
+  width: 34rem;
+  background-color: rgba(211, 21, 21, 0.377);
+  box-shadow: 0 0.8rem 5rem 2rem rgba(101, 90, 86, 0.1);
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.5s 0.2s;
+}
+
+.results,
+.likes {
+  padding: 3rem 0;
+}
+.results__list,
+.likes__list {
+  list-style: none;
+}
+.results__link:link,
+.results__link:visited,
+.likes__link:link,
+.likes__link:visited {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem 3rem;
+  transition: all 0.3s;
+  border-right: 1px solid #fff;
+  text-decoration: none;
+}
+.results__link:hover,
+.likes__link:hover {
+  background-color: #f9f5f3;
+  transform: translateY(-2px);
+}
+.results__link--active,
+.likes__link--active {
+  background-color: #f9f5f3;
+}
+.results__fig,
 .likes__fig {
   flex: 0 0 5.5rem;
   border-radius: 50%;
@@ -121,11 +193,38 @@
   fill: #fff;
 }
 
-.header {
-  grid-area: head;
-  background-image: url('../img/woodtwo.jpg');
-  background-size: cover;
+.btn-inline {
+  color: #ddce24;
+  font-size: 1.2rem;
+  border: none;
+  background-color: #f9f5f3;
+  padding: 0.8rem 1.2rem;
+  border-radius: 10rem;
+  margin-right: 7px;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  transition: all 0.2s;
+}
+.btn-inline svg {
+  height: 1.5rem;
+  width: 1.5rem;
+  fill: currentColor;
+  margin: 0 0.2rem;
+}
+.btn-inline span {
+  margin: 0 0.4rem;
+}
+.btn-inline:hover {
+  color: #ecdc2d;
+  background-color: #f2efee;
+}
+.btn-inline:focus {
+  outline: none;
+}
+
+//header
+.header {
+  background-image: url('../img/woodtwo.jpg');
+  background-size: cover;
 }

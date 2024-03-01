@@ -204,7 +204,7 @@ const controlAddRecipe = async function (newRecipe) {
 
 const init = function () {
   bookmarksView.addHandlerRender(controlBookmarks);
-  likesView.addHandlerRender(controlLike);
+  // likesView.addHandlerRender(controlLike);
   recipeView.addHandlerRender(controlRecipes);
   recipeView.addHandlerUpdateServings(controlServings);
   recipeView.addHandlerAddBookmark(controlAddBookmark);

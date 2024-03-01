@@ -87,10 +87,10 @@ class RecipeView extends View {
         <div class="likes__field">
         <button class="recipe__love">
         <svg class="header__likes">
-        <use href="${icons}#icon-heart${isLiked ? '' : '-outlined'}"></use>
-        </svg>
+        <use href="${icons}#icon-heart${isLiked ? '-outlined' : ''}"></use>
+      </svg>
         </button>
-        </div>
+          </div>
       
         <button class="btn--round btn--bookmark">
           <svg class="">

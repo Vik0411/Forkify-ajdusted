@@ -1,20 +1,21 @@
 import View from './View.js';
 import { isLiked } from '../model.js';
 import { elements } from '../helpers.js';
+import icons from 'url:../../img/icons.svg'; // Parcel 2
 
 class likesView extends View {
   _parentElement = document.querySelector('.header');
 
   toggleLikeBtn() {
     const iconString = isLiked ? 'icon-heart' : 'icon-heart-outlined';
-    document.querySelector('.recipe__love > use');
-    // .setAttribute('href', `src/img/icons.svg#${iconString}`);
+    document.querySelector('.recipe__love use');
+    // .setAttribute('href', `${icons}#${iconString}`);
     // icons.svg#icon-heart-outlined
   }
 
-  addHandlerRender(handler) {
-    window.addEventListener('load', handler);
-  }
+  // addHandlerRender(handler) {
+  //   window.addEventListener('load', handler);
+  // }
 
   toggleLikeMenu = numLikes => {
     elements.likesMenu.style.visibility = numLikes > 0 ? 'visible' : 'hidden';
@@ -56,9 +57,9 @@ class likesView extends View {
   }>
         <span>Page ${type === 'prev' ? page - 1 : page + 1}</span>
         <svg class="search__icon">
-            <use href="img/icons.svg#icon-triangle-${
-              type === 'prev' ? 'left' : 'right'
-            }"></use>
+            <use href="${icons}#icon-triangle-${
+    type === 'prev' ? 'left' : 'right'
+  }"></use>
         </svg>
     </button>
 `;
@@ -83,7 +84,7 @@ class likesView extends View {
       button = ``;
     }
 
-    elements.likesList.insertAdjacentHTML('afterbegin', button);
+    elements.likesList.insertAdjacentHTML('beforeend', button);
   };
 
   renderLikeResults = (likedLikes, page = 1, resPerPage = 3) => {
@@ -95,6 +96,12 @@ class likesView extends View {
     // render pagination buttons
     this.renderButtons(page, likedLikes.length, resPerPage);
   };
+
+  // _generateMarkup() {
+  //   return this._data
+  //     .map(bookmark => previewView.render(bookmark, false))
+  //     .join('');
+  // }
 }
 
 export default new likesView();
