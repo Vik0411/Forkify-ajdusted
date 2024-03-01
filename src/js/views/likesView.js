@@ -18,7 +18,7 @@ class likesView extends View {
   // }
 
   toggleLikeMenu = numLikes => {
-    elements.likesMenu.style.visibility = numLikes > 0 ? 'visible' : 'hidden';
+    elements.likesTop.style.visibility = numLikes > 0 ? 'visible' : 'hidden';
   };
 
   clearResults = () => {
